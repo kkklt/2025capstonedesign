@@ -51,6 +51,7 @@
 - **Sampling Method**: Halton Sequence 기반 준난수 샘플링(Quasi-random Sampling) 적용
 - **Constraints**: Self-Collision, 작업 영역 제한, 안전 거리 준수
 - **Output**: 5cm 단위로 세분화된 Cartesian 좌표 경로를 ROS 서비스('/dsr01m1013/motion/move-line')에 전달
+  
   <img width="225" height="311" alt="image" src="https://github.com/user-attachments/assets/2f16928f-f9a9-404a-94dd-1386d00fff56" />
   <img width="225" height="311" alt="image" src="https://github.com/user-attachments/assets/b2f729da-7ed8-4b8a-ae73-a46eae4bbd57" />
   

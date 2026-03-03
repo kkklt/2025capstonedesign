@@ -19,6 +19,7 @@
 - **Perception**: RealSense 및 YOLOv5를 통한 공간 인지 및 객체 탐지
 - **Planning**: MoveIt 환경 내 PRM/A* 기반의 최적 경로 설계
 - **Execution**: 자체 제작 ATC 및 전용 툴을 활용한 조리 및 배차(Dispatch)
+  
 <img width="440" height="240" alt="image" src="https://github.com/user-attachments/assets/0c883216-6d86-4913-8979-87074e92da82" />
 <img width="408" height="93" alt="image" src="https://github.com/user-attachments/assets/50e070a0-b1ae-45e2-91af-ac578e48af30" />
 
@@ -41,9 +42,11 @@
 ### 4.1 Environment Perception
 - **Initial Data Acquisition**: 작업 환경은 사람이 촬영하며, Intel RealSense D435i를 통해 RGB-D 데이터를 수집
 - **Hand-Eye-Callibration**: 방법을 기반으로 카메라와 로봇 베이스 간의 좌표 변환 행렬을 산출
+  
   <img width="313" height="170" alt="image" src="https://github.com/user-attachments/assets/e78d5e68-0773-4630-b32f-4711597b9fae" />
 - **Mapping**: 수집된 데이터를 기반으로 **Octomap**을 생성하고, 로봇이 공간을 모델링하도록 처리
 - **Remarks**: 로봇은 초기 데이터에 기반하여 환경을 이해하며, 작업 중 사람의 근접 여부는 카메라를 통해 실시간 감지
+  
   <img width="322" height="219" alt="image" src="https://github.com/user-attachments/assets/3969981e-e740-4d5d-9ec6-6c104538e7cc" />
 
 ### 4.2 Path Planning
@@ -57,13 +60,16 @@
   
 ### 4.3 Action and Tool Management
 - **Object Manipulation**: YOLOv5 기반 객체 검출로 컵 및 조리 도구 위치 파악 후 안정적인 물체 파지
+  
   <img width="316" height="189" alt="image" src="https://github.com/user-attachments/assets/2e9e5e98-90d9-4bb2-8c5c-5df69876ef86" />
 - **Workflow Execution**: 실제 조리 동작 시퀀스를 모델링하여 튀김/구이 작업 수행
 - **2-Function Gripper & Tray**: 컵과 트레이를 동시에 파지할 수 있는 다기능 그리퍼 설계
+
   <img width="433" height="170" alt="image" src="https://github.com/user-attachments/assets/bd3535e4-db83-4023-b516-3ef893e5ef12" />
   <img width="306" height="273" alt="image" src="https://github.com/user-attachments/assets/82f9842f-347f-48ee-9b7e-a9910b5071e3" />
   <img width="320" height="188" alt="image" src="https://github.com/user-attachments/assets/a16ca48f-88a4-4f6d-848e-bb629536cbfc" />
 - **Tool Changer (ATC)**: 자동 도구 교체를 통해 튀김기, 스크래퍼 등 다양한 작업 수행
+  
   <img width="324" height="275" alt="image" src="https://github.com/user-attachments/assets/bb1aa41a-bc42-40d8-9171-315d7c5e0016" />
   <img width="313" height="177" alt="image" src="https://github.com/user-attachments/assets/4435c176-f6cf-4c9c-a4dd-c655b083d3fa" />
 - **Design-to-Real Integration**: 자체 설계한 STP 데이터를 기반으로 로봇 가동 범위와 도구 간 간섭을 사전 시뮬레이션하여 하드웨어 안전성 확보
@@ -74,10 +80,12 @@
   | Master/Tool Unit | Static Load Analysis | 12kg 하중 인가 시 안전계수 15 이상 달성|
   | Full System Integration | Joint Torque Analysis | 1kg 부하 조리 시 안전계수 2.54 확보 (기준치 2.0 상회)|
   | Tool Exchange Interface | Statistical Repeatability | 3σ 기준 $\pm 0.010 mm$의 반복 정밀도 달성|
+
   <img width="323" height="258" alt="image" src="https://github.com/user-attachments/assets/663b78ec-50fc-481f-a966-aa06623dd8d7" />
 
 ### 4.4 Safety Measures
 - **Adaptive Speed Control**: 실시간 충돌을 검출하고 사람 거리를 감지하여 작업 속도 조정으로 안전 확보
+  
   <img width="310" height="210" alt="image" src="https://github.com/user-attachments/assets/d8b7a3f6-e37f-47a7-b8d3-8923b68c097e" />
 
 ---

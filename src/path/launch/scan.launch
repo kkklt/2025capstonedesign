@@ -1,0 +1,37 @@
+<launch>
+    <include file="$(find dsr_launcher)/launch/single_robot_rviz.launch">
+        <arg name="model" value="m1013"/>
+        <arg name="mode"  value="real"/>
+        <arg name="host"  value="192.168.137.100"/>
+    </include>
+
+    <node pkg="tf2_ros" type="static_transform_publisher" name="base0_to_baselink" 
+          args="0 0 0 0 0 0 base_0 base_link" launch-prefix="bash -c 'sleep 1.0; $0 $@' " />
+
+    <node pkg="tf2_ros" type="static_transform_publisher" name="link6_to_camera"
+      args="0 -0.120 0 -1.5707 -1.5707 3.14159  link6 camera_link"
+      launch-prefix="bash -c 'sleep 2.0; $0 $@' " />
+
+    <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+        <arg name="filters" value="pointcloud"/>
+    </include>
+
+    <node pkg="realsense_obstacle_detector" type="pointcloud_range_filter" name="pointcloud_range_filter" output="screen"
+          launch-prefix="bash -c 'sleep 3.0; $0 $@' " 
+          args="_scan_radius:=0.5 _voxel_leaf_size:=0.05"/>
+
+    <node pkg="realsense_obstacle_detector" type="relay_to_base.py" name="relay_to_base" output="screen"
+          launch-prefix="bash -c 'sleep 4.0; $0 $@' "/>
+    
+    <node pkg="octomap_server" type="octomap_server_node" name="octomap_server" output="screen"
+          launch-prefix="bash -c 'sleep 5.0; $0 $@' ">
+        <param name="frame_id"            value="base_link"/>  
+        <param name="resolution"          value="0.05"/>
+        <param name="pointcloud_min_z"    value="-1.0"/>
+        <param name="pointcloud_max_z"    value="5.0"/>
+        <param name="sensor_model/max_range" value="6.0"/>
+        <param name="publish_free_space"  value="true"/>
+      
+        <remap from="cloud_in" to="/pc_in_base"/>
+    </node>
+</launch>

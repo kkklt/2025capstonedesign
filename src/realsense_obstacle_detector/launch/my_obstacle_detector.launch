@@ -1,0 +1,22 @@
+<launch>
+  <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+    <arg name="filters" value="pointcloud" />
+    <arg name="depth_width" value="848" />  <arg name="depth_height" value="480" /> </include>
+
+  <node pkg="realsense_obstacle_detector" type="obstacle_detector_node" name="obstacle_detector_node" output="screen">
+    <param name="z_filter_min" value="0.02" />
+    <param name="z_filter_max" value="0.7" />
+    <param name="voxel_leaf_size" value="0.04" />       
+	<param name="plane_distance_threshold" value="0.03" />
+    <param name="cluster_tolerance" value="0.04" />
+    <param name="min_cluster_size" value="30" />
+    <param name="max_cluster_size" value="300000" />
+  </node>
+
+  <node pkg="tf" type="static_transform_publisher" name="odom_to_base_link_tf_publisher"
+        args="0 0 0 0 0 0 odom base_link 100" />
+
+  <node pkg="tf" type="static_transform_publisher" name="base_link_to_camera_depth_tf_publisher"
+        args="0.0253389 0.10517215 0.00920933 -0.0118 -0.0045 -0.9998 0.0118 base_link camera_depth_optical_frame 100" />
+
+</launch>

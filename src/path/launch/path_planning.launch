@@ -1,0 +1,5 @@
+<launch>
+  <node pkg="path" type="octomap_checker_node" name="octomap_checker" output="screen"/>
+  <!--<node pkg="path" type="cook.py" name="prm_astar_planner" output="screen"/>-->
+  <node pkg="path" type="move.py" name="prm_astar_planner2" output="screen"/>
+</launch>
